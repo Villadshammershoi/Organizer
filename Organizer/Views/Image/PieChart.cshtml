@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "PieChart";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label>fil</label>
+                <input type="file" name="files" multiple />
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.Label("Bredde")
+                    @Html.TextBox("pieWidth", null, new { @class = "form-control" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.Label("Højde")
+                    @Html.TextBox("pieHeight", null, new { @class = "form-control" })
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Opret piechart</button>
+        }
+    </div>
+    <div class="col-sm-12">
+        @if (Model != null)
+        {
+            <div class="panel">
+                <div class="panel-body">
+                    <h4>Din data piechart med billede upload data for 1 måned</h4>
+                    <img src="data:image/png;base64, @(Convert.ToBase64String(Model.ToArray(),0, Model.ToArray().Length))" />
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

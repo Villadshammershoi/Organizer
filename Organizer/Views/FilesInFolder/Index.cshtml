@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All the files in the selected folder</h2>
+
+<div class="col-sm-6">
+    <div class="row">
+        <div class="form-group">
+            @using (Html.BeginForm("Index", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <input type="file" name="files" multiple />
+                    <input type="hidden" name="folderName" value="@Model.CurrentFolder" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="upload" class="btn btn-primary btn-lg" multiple />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<h2>Opret ny folder</h2>
+<div class="col-sm-6">
+    <div class="row">
+        <div class="form-group">
+            @using (Html.BeginForm("Index", "CreateFolder", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <input type="text" name="Name" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="folderName" class="btn btn-primary btn-lg" multiple />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@foreach (System.IO.FileInfo FilesInFolder in Model.files)
+{
+    <div class="col-sm-4">
+        <img class="img-responsive" src="~/Files/@(Model.CurrentFolder != null ? Model.CurrentFolder : null)/@FilesInFolder.Name" />
+    </div>
+}

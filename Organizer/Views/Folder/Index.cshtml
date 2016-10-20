@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Folders</h2>
+
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Folder name</th>
+            <th>Creation date</th>
+            <th>Delete folder</th>            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.IO.DirectoryInfo folder in Model)
+        {
+            <tr>
+                <td><a href="@Url.Action("Index", "FilesInFolder", new {  folder = folder.Name})">@folder.Name</a></td>
+                <td>@folder.CreationTime</td>
+                <td><a href="@Url.Action("Delete", new { name = folder.Name })">Delete folder.</a></td>
+            </tr>
+        }
+        
+    </tbody>
+
+</table>
